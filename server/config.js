@@ -1,5 +1,9 @@
 import 'dotenv/config';
 
+const API_URL = "https://exelix.onrender.com";
+const HCAPTCHA_SITEKEY = "10000000-ffff-ffff-ffff-000000000001";
+const VAPID_PUBLIC_KEY = "BOrX7aY2rV8bLk3mQe1wZ0tJ5nP4sX9yR2vA6bH7pE8dF3gC1hJ";
+
 export default {
   port: parseInt(process.env.PORT || '3000', 10),
   apiUrl: process.env.API_URL || 'http://localhost:3000',

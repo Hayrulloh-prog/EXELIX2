@@ -1,5 +1,23 @@
 const API = import.meta.env.VITE_API_URL || '';
 
+const API_URL = import.meta.env.PROD
+  ? '/.netlify/functions/my_functions'
+  : 'http://localhost:8888/.netlify/functions/my_functions';
+
+export const testFunction = async () => {
+  const response = await fetch(API_URL);
+  return response.json();
+};
+
+export const sendData = async (data) => {
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  return response.json();
+};
+
 function getAuth() {
   return { credentials: 'include' };
 }
