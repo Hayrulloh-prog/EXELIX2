@@ -1,16 +1,23 @@
 const API = import.meta.env.VITE_API_URL || '';
+const HCAPTCHA_SITEKEY = import.meta.env.VITE_HCAPTCHA_SITEKEY;
+const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY;
 
-const API_URL = import.meta.env.PROD
+// Для Netlify функций (если они нужны)
+const NETLIFY_API_URL = import.meta.env.PROD
   ? '/.netlify/functions/my_functions'
   : 'http://localhost:8888/.netlify/functions/my_functions';
 
+// Экспортируем переменные для использования в компонентах
+export { API, HCAPTCHA_SITEKEY, VAPID_PUBLIC_KEY };
+
+// Функции для Netlify (опционально)
 export const testFunction = async () => {
-  const response = await fetch(API_URL);
+  const response = await fetch(NETLIFY_API_URL);
   return response.json();
 };
 
 export const sendData = async (data) => {
-  const response = await fetch(API_URL, {
+  const response = await fetch(NETLIFY_API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
@@ -18,6 +25,7 @@ export const sendData = async (data) => {
   return response.json();
 };
 
+// Остальной ваш код остается БЕЗ изменений:
 function getAuth() {
   return { credentials: 'include' };
 }
